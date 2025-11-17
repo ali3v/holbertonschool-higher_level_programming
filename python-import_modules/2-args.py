@@ -2,13 +2,12 @@
 import sys
 
 if __name__ == "__main__":
-    args = sys.argv[1:]
-    num_args = len(args)
-    if num_args == 1:
-        print("{} argument:".format(num_args))
-    elif num_args == 0:
-        print("{} arguments.".format(num_args))
+    argv = sys.argv[1:]  # Skriptin özü xaric bütün argumentləri götürürük
+    argc = len(argv)
+
+    if argc == 0:
+        print("0 arguments.")
     else:
-        print("{} arguments:".format(num_args))
-    for i, arg in enumerate(args, 1):
-        print("{}: {}".format(i, arg))
+        print(f"{argc} argument{'s' if argc > 1 else ''}:")
+        for i, arg in enumerate(argv, start=1):
+            print(f"{i}: {arg}")
