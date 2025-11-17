@@ -3,25 +3,24 @@ import sys
 from calculator_1 import add, sub, mul, div
 
 if __name__ == "__main__":
-    args = sys.argv[1:]
-    if len(args) != 3:
+    if len(sys.argv) != 4:
         print("Usage: ./100-my_calculator.py <a> <operator> <b>")
         sys.exit(1)
 
-    a = int(args[0])
-    operator = args[1]
-    b = int(args[2])
+    a = int(sys.argv[1])
+    operator = sys.argv[2]
+    b = int(sys.argv[3])
 
-    if operator == '+':
+    if operator == "+":
         result = add(a, b)
-    elif operator == '-':
+    elif operator == "-":
         result = sub(a, b)
-    elif operator == '*':
+    elif operator == "*":
         result = mul(a, b)
-    elif operator == '/':
+    elif operator == "/":
         result = div(a, b)
     else:
         print("Unknown operator. Available operators: +, -, * and /")
         sys.exit(1)
 
-    print(f"{a} {operator} {b} = {result}")
+    print("{} {} {} = {}".format(a, operator, b, result))
