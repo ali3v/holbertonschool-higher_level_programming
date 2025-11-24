@@ -16,6 +16,5 @@ class MyList(list):
         Prints the elements of the list in ascending sorted order.
         Assumes all elements are of type int.
         """
-        # The sorted() function returns a new sorted list, leaving the
-        # original list (self) unchanged.
+        # sorted(self) returns a *new* sorted list, which is then printed.
         print(sorted(self))
