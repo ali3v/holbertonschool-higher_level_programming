@@ -1,15 +1,19 @@
 #!/usr/bin/python3
 """
-Module that defines a Rectangle class.
+Module defines a Rectangle class with instance counter.
 """
 
 
 class Rectangle:
     """Rectangle class that defines a rectangle."""
 
+    number_of_instances = 0  # Public class attribute
+
     def __init__(self, width=0, height=0):
+        """Initialize width and height and increment instance counter."""
         self.width = width
         self.height = height
+        Rectangle.number_of_instances += 1
 
     @property
     def width(self):
@@ -48,3 +52,18 @@ class Rectangle:
         if self.__width == 0 or self.__height == 0:
             return 0
         return 2 * (self.__width + self.__height)
+
+    def __str__(self):
+        """Return the rectangle as a string of # characters."""
+        if self.__width == 0 or self.__height == 0:
+            return ""
+        return "\n".join("#" * self.__width for _ in range(self.__height))
+
+    def __repr__(self):
+        """Return a string representation to recreate a new instance."""
+        return f"Rectangle({self.__width}, {self.__height})"
+
+    def __del__(self):
+        """Print message when an instance is deleted and decrement counter."""
+        print("Bye rectangle...")
+        Rectangle.number_of_instances -= 1
