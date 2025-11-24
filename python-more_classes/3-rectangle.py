@@ -106,9 +106,5 @@ class Rectangle:
         # Join the rows with newline characters, repeated 'height' times
         return "\n".join([row for _ in range(self.__height)])
 
-    def __repr__(self):
-        """
-        Returns a string representation of the object that can be used
-        to recreate a new instance (for debugging).
-        """
-        return f"Rectangle({self.__width}, {self.__height})"
+    # The __repr__ method has been removed to allow the default object
+    # representation to be used, matching the required output.
