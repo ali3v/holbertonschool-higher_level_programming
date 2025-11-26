@@ -1,2 +1,2 @@
--- 5-first_table_description.sql
-SHOW COLUMNS FROM first_table;
+-- 5-full_table.sql
+SHOW CREATE TABLE first_table;
