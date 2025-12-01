@@ -1,42 +1,33 @@
 #!/usr/bin/python3
-"""HTTP helper script: GET, POST, check header, and handle errors."""
+"""HTTP helper script using requests: GET, POST, check header, and handle errors."""
 
 import sys
-import urllib.request
-import urllib.parse
-import urllib.error
+import requests
 
 def fetch_status(url):
     """Fetch URL and print response body."""
-    req = urllib.request.Request(url)
-    req.add_header("cfclearance", "true")
-    with urllib.request.urlopen(req) as res:
-        body = res.read()
-        print("Body response:")
-        print(f"\t- type: {type(body)}")
-        print(f"\t- content: {body}")
-        print(f"\t- utf8 content: {body.decode('utf-8')}")
+    r = requests.get(url, headers={"cfclearance": "true"})
+    print("Body response:")
+    print(f"\t- type: {type(r.text)}")
+    print(f"\t- content: {r.text}")
 
 def get_request_id(url):
     """Print the X-Request-Id header from the URL."""
-    req = urllib.request.Request(url)
-    with urllib.request.urlopen(req) as res:
-        print(res.getheader("X-Request-Id"))
+    r = requests.get(url)
+    print(r.headers.get("X-Request-Id"))
 
 def post_email(url, email):
     """POST email and print response body."""
-    data = urllib.parse.urlencode({"email": email}).encode("utf-8")
-    req = urllib.request.Request(url, data=data)
-    with urllib.request.urlopen(req) as res:
-        print(res.read().decode("utf-8"))
+    r = requests.post(url, data={"email": email})
+    print(r.text)
 
 def fetch_with_error_handling(url):
     """GET request and print response or error code."""
-    try:
-        with urllib.request.urlopen(url) as res:
-            print(res.read().decode("utf-8"))
-    except urllib.error.HTTPError as e:
-        print(f"Error code: {e.code}")
+    r = requests.get(url)
+    if r.status_code >= 400:
+        print(f"Error code: {r.status_code}")
+    else:
+        print(r.text)
 
 if __name__ == "__main__":
     action = sys.argv[1]  # get_status, get_id, post_email, get_error
