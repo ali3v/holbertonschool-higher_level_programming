@@ -52,7 +52,7 @@ def add_user():
     Adds a new user to the dictionary via POST request.
     """
     # Parse incoming JSON data. silent=True prevents automatic 400 error
-    # if content type is wrong, allowing us to handle it manually.
+    # allows handling invalid JSON manually.
     data = request.get_json(silent=True)
 
     if data is None:
@@ -68,7 +68,7 @@ def add_user():
 
     # Add new user
     users[username] = data
-    return jsonify({"message": "User added", "user": data})
+    return jsonify({"message": "User added", "user": data}), 201
 
 
 if __name__ == "__main__":
