@@ -1,2 +1,2 @@
 #!/usr/bin/python3
-__import__("sys").stdout.write(bytes(range(65, 91)).decode() + chr(10))
+print(bytes(range(65, 91)). decode())
